@@ -159,7 +159,7 @@ npm run build
 - `POST /api/v1/executor/heartbeat` - 心跳上报
 - `GET /api/v1/executor` - 执行器列表
 
-## 🎯 技术亮点（面试谈资）
+## 🎯 技术亮点
 
 1. **时间轮算法** - 高效定时任务调度，O(1)复杂度
 2. **一致性哈希** - 任务路由，最小化节点变化影响
