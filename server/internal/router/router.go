@@ -18,7 +18,7 @@ func SetupRouter(mode string) *gin.Engine {
 	r.Use(middleware.Logger())
 	r.Use(middleware.Cors())
 
-	// 初始化限流器
+	// todo 初始化限流器
 	middleware.InitRateLimiter(100, 200) // 每秒100个请求，桶容量200
 	r.Use(middleware.RateLimit())
 
@@ -112,4 +112,3 @@ func SetupRouter(mode string) *gin.Engine {
 
 	return r
 }
-

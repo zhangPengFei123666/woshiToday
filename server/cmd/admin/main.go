@@ -17,7 +17,7 @@ import (
 	"distributed-scheduler/pkg/redis"
 )
 
-var configFile = flag.String("config", "config.yaml", "配置文件路径")
+var configFile = flag.String("config", "config.yaml", "配置文件路径，默认为config.yaml")
 
 func main() {
 	flag.Parse()
@@ -86,4 +86,3 @@ func main() {
 
 	logger.Info("服务已关闭")
 }
-

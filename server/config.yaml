@@ -6,11 +6,21 @@ server:
   name: distributed-scheduler
 
 # MySQL配置
+#mysql:
+#  host: 127.0.0.1
+#  port: 3306
+#  username: root
+#  password: 123456root
+#  database: distributed_scheduler
+#  charset: utf8mb4
+#  max_idle_conns: 10
+#  max_open_conns: 100
+#  log_mode: true
 mysql:
-  host: 127.0.0.1
+  host: 10.12.3.79
   port: 3306
   username: root
-  password: 123456root
+  password: mysql_MpR4hs
   database: distributed_scheduler
   charset: utf8mb4
   max_idle_conns: 10
