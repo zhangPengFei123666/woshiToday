@@ -99,3 +99,36 @@ func (this *LRUCache) Put(key int, value int) {
 		this.MoveToHead(node)
 	}
 }
+
+type ListNode struct {
+	Val  int
+	Next *ListLRU
+}
+
+// rever list
+func fanzhuanList(head *ListNode) *ListNode {
+	var pre *ListNode
+	for head != nil {
+		nt := head.Next
+		head.Next = pre
+		pre = head
+		head = nt
+	}
+	return pre
+}
+
+// erfen faze
+func searchErfen(nums []int, target int) int {
+	l, r := 0, len(nums)
+	for l < r {
+		mid := l + (r-l)/2
+		if nums[mid] == target {
+			return mid
+		} else if nums[mid] < target {
+			l = mid + 1
+		} else {
+			r = mid
+		}
+	}
+	return -1
+}
