@@ -100,35 +100,61 @@ func (this *LRUCache) Put(key int, value int) {
 	}
 }
 
-type ListNode struct {
-	Val  int
-	Next *ListLRU
-}
-
-// rever list
-func fanzhuanList(head *ListNode) *ListNode {
-	var pre *ListNode
-	for head != nil {
-		nt := head.Next
-		head.Next = pre
-		pre = head
-		head = nt
-	}
-	return pre
-}
-
-// erfen faze
-func searchErfen(nums []int, target int) int {
-	l, r := 0, len(nums)
-	for l < r {
+// erfen search
+func search(nums []int, target int) int {
+	l, r := 0, len(nums)-1
+	res := -1
+	for l <= r {
 		mid := l + (r-l)/2
 		if nums[mid] == target {
 			return mid
-		} else if nums[mid] < target {
-			l = mid + 1
+		} else if nums[mid] > target {
+			r = mid - 1
 		} else {
+			l = mid + 1
+		}
+		res = mid
+	}
+	if res == 0 {
+		return 0
+	}
+	return res + 1
+}
+
+func searchRange(nums []int, target int) []int {
+	l := firstAndSecondErfen(nums, target)
+	if l == len(nums) || nums[l] != target {
+		return []int{-1, -1}
+	}
+	r := firstAndSecondErfen(nums, target+1) - 1
+	return []int{l, r}
+}
+
+func firstAndSecondErfen(nums []int, target int) int {
+	l, r := 0, len(nums)
+	for l < r {
+		mid := l + (r-l)/2
+		if nums[mid] >= target {
 			r = mid
+		} else {
+			l = mid + 1
 		}
 	}
-	return -1
+	return l
+}
+
+func mySqrt(x int) int {
+	l, r := 0, x
+	ans := -1
+
+	for l <= r {
+		mid := l + (r-l)/2
+		if mid*mid <= x {
+			ans = mid
+			l = mid + 1
+		} else {
+			r = mid - 1
+		}
+	}
+	return ans
 }
