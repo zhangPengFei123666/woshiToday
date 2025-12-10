@@ -1,4 +1,4 @@
-package main
+package first
 
 func lengthStr(s string) int {
 	ans := 0
