@@ -158,3 +158,60 @@ func mySqrt(x int) int {
 	}
 	return ans
 }
+
+// yichu yuansu
+func removeElement(nums []int, val int) int {
+	show := 0
+	for fast := 0; fast < len(nums); fast++ {
+		if nums[fast] == val {
+			continue
+		}
+		nums[show] = nums[fast]
+		show++
+	}
+	return show
+}
+
+func removeElementxiangxiang(nums []int, val int) int {
+	l, r := 0, len(nums)-1
+	for l <= r {
+		for l <= r && nums[l] != val {
+			l++
+		}
+		for l <= r && nums[r] == val {
+			r--
+		}
+
+		if l <= r {
+			nums[l] = nums[r]
+			l++
+			r--
+		}
+	}
+	return l
+}
+
+func removeNumsNotDizeng(nums []int) int {
+	show := 1
+	if len(nums) == 0 {
+		return 0
+	}
+	for fast := 1; fast < len(nums); fast++ {
+		if nums[fast] != nums[fast-1] {
+			nums[show] = nums[fast]
+			show++
+		}
+	}
+	return show
+}
+
+// yidong zero
+func moveZeroes(nums []int) {
+	show := 0
+	for fast := 0; fast < len(nums); fast++ {
+		if nums[fast] != 0 {
+			nums[show], nums[fast] = nums[fast], nums[show]
+			show++
+		}
+	}
+}
