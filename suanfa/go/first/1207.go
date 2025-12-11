@@ -159,59 +159,82 @@ func mySqrt(x int) int {
 	return ans
 }
 
-// yichu yuansu
-func removeElement(nums []int, val int) int {
-	show := 0
-	for fast := 0; fast < len(nums); fast++ {
-		if nums[fast] == val {
-			continue
-		}
-		nums[show] = nums[fast]
-		show++
-	}
-	return show
-}
-
-func removeElementxiangxiang(nums []int, val int) int {
+func sortedSquares(nums []int) []int {
+	// 有序数组的平方
+	res := make([]int, len(nums))
+	k := len(nums) - 1
 	l, r := 0, len(nums)-1
-	for l <= r {
-		for l <= r && nums[l] != val {
-			l++
-		}
-		for l <= r && nums[r] == val {
-			r--
-		}
 
-		if l <= r {
-			nums[l] = nums[r]
+	for l <= r {
+		if nums[l]*nums[l] > nums[r]*nums[r] {
+			res[k] = nums[l] * nums[l]
+			k--
 			l++
+		} else {
+			res[k] = nums[r] * nums[r]
+			k--
 			r--
 		}
 	}
-	return l
+	return res
 }
 
-func removeNumsNotDizeng(nums []int) int {
-	show := 1
-	if len(nums) == 0 {
+func minSubArrayLen(target int, nums []int) int {
+	// 长度最小的子数组
+	i := 0
+	sum := 0
+	res := len(nums) + 1
+	for j := 0; j < len(nums); j++ {
+		sum += nums[j]
+		for sum >= target {
+			res = min(res, j-i+1)
+			sum -= nums[i]
+			i++
+		}
+	}
+	if res == len(nums)+1 {
 		return 0
 	}
-	for fast := 1; fast < len(nums); fast++ {
-		if nums[fast] != nums[fast-1] {
-			nums[show] = nums[fast]
-			show++
-		}
-	}
-	return show
+	return res
 }
 
-// yidong zero
-func moveZeroes(nums []int) {
-	show := 0
-	for fast := 0; fast < len(nums); fast++ {
-		if nums[fast] != 0 {
-			nums[show], nums[fast] = nums[fast], nums[show]
-			show++
+// 最小覆盖子串
+func minWindow(s string, t string) string {
+	left, ansLeft, ansRight := 0, -1, len(s)
+	sStr := make([]int, 128)
+	tStr := make([]int, 128)
+	for _, c := range t {
+		tStr[c]++
+	}
+	for right := 0; right < len(s); right++ {
+		sStr[s[right]]++
+		for isCover(sStr, tStr) {
+			if right-left < ansRight-ansLeft {
+				ansLeft = left
+				ansRight = right
+			}
+			sStr[s[left]]--
+			left++
 		}
 	}
+
+	if ansLeft == -1 {
+		return ""
+	}
+	return s[ansLeft : ansRight+1]
+}
+
+func isCover(s []int, t []int) bool {
+	for i := 'a'; i < 'z'; i++ {
+		if s[i] < t[i] {
+			return false
+		}
+	}
+
+	for i := 'A'; i < 'Z'; i++ {
+		if s[i] < t[i] {
+			return false
+		}
+	}
+	return true
 }
