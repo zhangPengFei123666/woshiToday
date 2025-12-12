@@ -238,3 +238,74 @@ func isCover(s []int, t []int) bool {
 	}
 	return true
 }
+
+// 螺旋矩阵
+func generateMatrix(n int) [][]int {
+	left, right := 0, n-1
+	top, bottom := 0, n-1
+	num := 1
+	tar := n * n
+	res := make([][]int, n)
+	for i := 0; i < n; i++ {
+		res[i] = make([]int, n)
+	}
+	for num <= tar {
+		for i := left; i <= right; i++ {
+			res[top][i] = num
+			num++
+		}
+		top += 1
+		for i := top; i <= bottom; i++ {
+			res[i][right] = num
+			num++
+		}
+		right -= 1
+		for i := right; i >= left; i-- {
+			res[bottom][i] = num
+			num++
+		}
+		bottom -= 1
+		for i := bottom; i >= top; i-- {
+			res[i][left] = num
+			num++
+		}
+		left += 1
+	}
+	return res
+}
+
+// 顺时针旋转返回螺旋顺序
+func spiralOrder(matrix [][]int) []int {
+	m, n := len(matrix), len(matrix[0])
+	if m == 0 || n == 0 {
+		return []int{}
+	}
+	tar := m * n
+	num := 0
+	res := make([]int, m*n)
+	left, right := 0, n-1
+	top, bottom := 0, m-1
+	for num < tar {
+		for i := left; i <= right && num < tar; i++ {
+			res[num] = matrix[top][i]
+			num++
+		}
+		top++
+		for i := top; i <= bottom && num < tar; i++ {
+			res[num] = matrix[i][right]
+			num++
+		}
+		right--
+		for i := right; i >= left && num < tar; i-- {
+			res[num] = matrix[bottom][i]
+			num++
+		}
+		bottom--
+		for i := bottom; i >= top && num < tar; i-- {
+			res[num] = matrix[i][left]
+			num++
+		}
+		left++
+	}
+	return res
+}
