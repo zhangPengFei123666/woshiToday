@@ -309,3 +309,38 @@ func spiralOrder(matrix [][]int) []int {
 	}
 	return res
 }
+
+func spiralArray(array [][]int) []int {
+	if len(array) == 0 || len(array[0]) == 0 {
+		return []int{}
+	}
+	m, n := len(array), len(array[0])
+	res := make([]int, m*n)
+	left, right := 0, n-1
+	top, bottom := 0, m-1
+	num := 0
+	for num < m*n {
+		for i := left; i <= right && num < m*n; i++ {
+			res[num] = array[top][i]
+			num++
+		}
+		top++
+		for i := top; i <= bottom && num < m*n; i++ {
+			res[num] = array[i][right]
+			num++
+		}
+		right--
+		for i := right; i >= left && num < m*n; i-- {
+			res[num] = array[bottom][i]
+			num++
+		}
+		bottom--
+		for i := bottom; i >= top && num < m*n; i-- {
+			res[num] = array[i][left]
+			num++
+		}
+		left++
+	}
+	return res
+
+}
