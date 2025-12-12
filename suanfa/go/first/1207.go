@@ -225,13 +225,13 @@ func minWindow(s string, t string) string {
 }
 
 func isCover(s []int, t []int) bool {
-	for i := 'a'; i < 'z'; i++ {
+	for i := 'a'; i <= 'z'; i++ {
 		if s[i] < t[i] {
 			return false
 		}
 	}
 
-	for i := 'A'; i < 'Z'; i++ {
+	for i := 'A'; i <= 'Z'; i++ {
 		if s[i] < t[i] {
 			return false
 		}
